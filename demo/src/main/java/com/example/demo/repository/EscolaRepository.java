@@ -1,7 +1,10 @@
 package com.example.demo.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.annotation.PostConstruct;
 
 import com.example.demo.model.Escola;
 
@@ -12,7 +15,22 @@ import org.springframework.stereotype.Component;
 public class EscolaRepository {
 
     private List<Escola> escolas;
-    private int nextID=1;
+    private int nextID;
+
+    @PostConstruct
+    public void init() {
+        Escola e1 = new Escola();
+        e1.setId(1);
+        e1.setNome("Facens");
+        e1.setEndereco("Rua Facens");
+        e1.setEmail("facens@facens.br");
+        e1.setTel("(15) 3232-3232");
+
+        escolas = new ArrayList<Escola>();
+        escolas.add(e1);
+
+        nextID = 2;
+    }
 
     /*  Método responsável por fazer a busca de todas as escolas,
         retornando uma lista
