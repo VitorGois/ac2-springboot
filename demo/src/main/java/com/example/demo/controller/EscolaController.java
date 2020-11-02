@@ -41,7 +41,7 @@ public class EscolaController {
     }
 
     //Faz a leitura do método HTTP GET (receber), porém terá um caminho a mais a ser passado na URI
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     /*  Método para buscar através do nosso service uma determinada escola através do seu ID
         retornado além da escola, qual o status http da requisição
         */
