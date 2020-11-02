@@ -1,14 +1,12 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
 public class Curso {
     
     private int id;
     private String nome;
     private String professor;
     private String sala;
-    private Date data;
+    private String data;
 
     public int getId() {
         return id;
@@ -18,38 +16,36 @@ public class Curso {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getTeacher() {
+    public String getProfessor() {
         return professor;
     }
 
-    public void setTeacher(String teacher) {
-        this.professor = teacher;
+    public void setProfessor(String professor) {
+        this.professor = professor;
     }
 
-    public String getRoom() {
+    public String getSala() {
         return sala;
     }
 
-    public void setRoom(String room) {
-        this.sala = room;
+    public void setSala(String sala) {
+        this.sala = sala;
     }
 
-    public Date getDate() {
+    public String getData() {
         return data;
     }
 
-    public void setDate(Date date) {
-        this.data = date;
+    public void setData(String data) {
+        this.data = data;
     }
-
-    
 
 }

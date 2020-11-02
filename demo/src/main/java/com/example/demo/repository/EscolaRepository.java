@@ -46,7 +46,7 @@ public class EscolaRepository {
         */
     public Optional<Escola> getEscolaByID(int id) {
         for (Escola aux : escolas) {
-            if (aux.getId() ==id) {
+            if (aux.getId() == id) {
                 return Optional.of(aux);
             }
         }
