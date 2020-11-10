@@ -48,8 +48,6 @@ public class EscolaService {
 		*/
 	public Escola fromDTO(EscolaDTO dto) {
 		Escola aux = new Escola();
-		aux.setNome(dto.getNome());
-		aux.setEndereco(dto.getEndereco());
 		aux.setTel(dto.getTel());
 		aux.setEmail(dto.getEmail());
 

@@ -12,7 +12,7 @@ public class Escola {
 	private String tel;
 	private String email;
 
-	//Esta anotação faz com o que na exibição dos dados através do JSON, não aconteça repetição desnecessária
+	//Esta anotação faz com o que na exibição dos dados através do JSON, não aconteça repetição
 	@JsonIgnore
 	private ArrayList<Curso> cursos = new ArrayList<>();
 

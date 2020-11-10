@@ -34,10 +34,8 @@ public class CursoService {
 
 	public Curso fromDTO(CursoDTO dto) {
 		Curso aux = new Curso();
-		aux.setNome(dto.getNome());
+
 		aux.setProfessor(dto.getProfessor());
-		aux.setSala(dto.getSala());
-		aux.setData(dto.getData());
 
 		return aux;
 	}

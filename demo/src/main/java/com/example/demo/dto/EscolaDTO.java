@@ -5,24 +5,10 @@ package com.example.demo.dto;
     É muito semelhante a classe Escola porém sem conter o ID
     */
 public class EscolaDTO {
-    
-    private String nome;
-    private String endereco;
-    private String tel;
-    private String email;
 
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+    private String tel;
+	private String email;
+	
 	public String getTel() {
 		return tel;
 	}
