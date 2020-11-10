@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.dto.EscolaDTO;
+import com.example.demo.model.Curso;
 import com.example.demo.model.Escola;
+import com.example.demo.service.CursoService;
 import com.example.demo.service.EscolaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class EscolaController {
     //Anotação que tem por função injetar uma dependência externa
     @Autowired
     private EscolaService escolaService;
+
+    @Autowired
+    private CursoService cursoService;
 
     //Faz a leitura do método HTTP GET (receber)
     @GetMapping
@@ -56,11 +61,11 @@ public class EscolaController {
     /*  Método para fazer um novo cadastro (salvar) em nosso sistema uma nova escola
         retornando o status de criação junto com a nova URI
         */
-    public ResponseEntity<Void> postEscola(@RequestBody /*Faz a requisição dos dados através de um Body (Postman)*/EscolaDTO novoCadastro, 
+    public ResponseEntity<Void> postEscola(@RequestBody /*Faz a requisição dos dados através de um Body (Postman)*/Escola novoCadastro, 
                                             HttpServletRequest request, /*Contém todas as informações da requisição*/
                                             UriComponentsBuilder builder) /*Utilizada para fazer a construção de uma nova URI*/ {
         //Variável auxiliar para armazenar a nova escola cadastrada, através do nosso service com o axuílio do DTO
-        Escola aux = escolaService.save(escolaService.fromDTO(novoCadastro));
+        Escola aux = escolaService.save(novoCadastro);
 
         //Criação de uma URI dinâmica, através dos atributos que buscamos através do request e builder
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + aux.getId()).build();
@@ -90,6 +95,28 @@ public class EscolaController {
         aux = escolaService.update(aux);
 
         return ResponseEntity.ok(aux);  //status 200 (ok)
+    }
+
+    @GetMapping("/{id}/cursos")
+    
+    //Método responsável por buscar todos os cursos referente a Escola de ID   
+    public List<Curso> getPedidosCliente(@PathVariable int id) {
+        Escola aux = escolaService.getEscolaByID(id);
+        return aux.getCursos();	
+    }
+
+    @PostMapping("/{id}/cursos")
+    /*  
+        Método responsável por fazer o cadastro de um novo curso em determinada Escola,
+        retornando o status de criação (200) e a nova URI criada
+        */ 
+    public ResponseEntity<Void> postCursoEscola(@PathVariable int id, @RequestBody Curso curso, HttpServletRequest request, UriComponentsBuilder builder) {
+        curso = cursoService.save(id, curso);
+
+        //Criação de uma URI dinâmica, através dos atributos que buscamos através do request e builder
+        UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + curso.getId()).build();
+
+        return ResponseEntity.created(uriComponents.toUri()).build(); //status 200 (created)
     }
 
 }

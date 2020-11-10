@@ -1,10 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
-import javax.annotation.PostConstruct;
 
 import com.example.demo.model.Escola;
 
@@ -14,28 +11,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class EscolaRepository {
 
-    private List<Escola> escolas;
-    private int nextID;
+    private ArrayList<Escola> escolas = new ArrayList<>();
+    private int nextID=1;
 
-    @PostConstruct
-    public void init() {
-        Escola e1 = new Escola();
-        e1.setId(1);
-        e1.setNome("Facens");
-        e1.setEndereco("Rua Facens");
-        e1.setEmail("facens@facens.br");
-        e1.setTel("(15) 3232-3232");
+    // @PostConstruct
+    // public void init() {
+    //     Escola e1 = new Escola();
+    //     e1.setId(1);
+    //     e1.setNome("Facens");
+    //     e1.setEndereco("Rua Facens");
+    //     e1.setEmail("facens@facens.br");
+    //     e1.setTel("(15) 3232-3232");
 
-        escolas = new ArrayList<Escola>();
-        escolas.add(e1);
+    //     escolas = new ArrayList<Escola>();
+    //     escolas.add(e1);
 
-        nextID = 2;
-    }
+    //     nextID = 2;
+    // }
 
     /*  Método responsável por fazer a busca de todas as escolas,
         retornando uma lista
         */
-	public List<Escola> getAllEscolas() {
+	public ArrayList<Escola> getAllEscolas() {
 		return escolas;
     }
     

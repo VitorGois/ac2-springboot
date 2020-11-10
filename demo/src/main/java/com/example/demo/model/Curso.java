@@ -1,15 +1,25 @@
 package com.example.demo.model;
 
 public class Curso {
-    
+
     private int id;
     private String nome;
     private String professor;
     private String sala;
     private String data;
 
+    private Escola escola;
+
     public int getId() {
         return id;
+    }
+
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
     }
 
     public void setId(int id) {

@@ -1,10 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
-import javax.annotation.PostConstruct;
 
 import com.example.demo.model.Curso;
 
@@ -13,25 +10,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class CursoRepository {
     
-	private List<Curso> cursos;
-	private int nextID;
+	private ArrayList<Curso> cursos = new ArrayList<>();
+	private int nextID=1;
 
-	@PostConstruct
-	public void init() {
-		Curso c1 = new Curso();
-		c1.setId(1);
-		c1.setNome("Algoritmos");
-		c1.setProfessor("Glauco");
-		c1.setSala("A21");
-		c1.setData("Terça");
+	// @PostConstruct
+	// public void init() {
+	// 	Curso c1 = new Curso();
+	// 	c1.setId(1);
+	// 	c1.setNome("Algoritmos");
+	// 	c1.setProfessor("Glauco");
+	// 	c1.setSala("A21");
+	// 	c1.setData("Terça");
 
-		cursos = new ArrayList<Curso>();
-		cursos.add(c1);
+	// 	cursos = new ArrayList<Curso>();
+	// 	cursos.add(c1);
 
-		nextID = 2;
-	}
+	// 	nextID = 2;
+	// }
 
-    public List<Curso> getAllCursos() {
+    public ArrayList<Curso> getAllCursos() {
         return cursos;
     }
 

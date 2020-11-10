@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.demo.dto.CursoDTO;
 import com.example.demo.model.Curso;
+import com.example.demo.model.Escola;
 import com.example.demo.repository.CursoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class CursoService {
 
 	@Autowired
 	private CursoRepository repository;
+
+	@Autowired
+	private EscolaService escolaService;
 
 	public List<Curso> getAllCursos() {
 		return repository.getAllCursos();
@@ -38,8 +42,15 @@ public class CursoService {
 		return aux;
 	}
 
-	public Curso save(Curso curso) {
+	public Curso save(int idEscola, Curso curso) {
+		//Se não existir lança 404 e finaliza
+		Escola escola = escolaService.getEscolaByID(idEscola);
+		
+		curso.setEscola(escola);
+		escola.addCurso(curso);
+
 		return repository.save(curso);
+
 	}
 
 	public void removeByID(int id) {
