@@ -67,11 +67,13 @@ public class CursoService {
 		escola.addCurso(curso);
 
 		return repository.save(curso);
-
 	}
 
-	public void removeByID(int id) {
-		repository.remove(getCursoByID(id));
+	public void removeByID(int cod, Escola escola) {
+		Curso curso = getCursoByID(cod);
+
+		escola.removeCurso(curso);
+		repository.remove(curso);
 	}
 
 	public Curso update(Curso curso) {

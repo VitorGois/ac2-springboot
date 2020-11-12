@@ -57,10 +57,7 @@ public class CursoRepository {
 		Curso aux = getCursoByID(curso.getId()).get();
 
 		if (aux != null) {
-			aux.setNome(curso.getNome());
 			aux.setProfessor(curso.getProfessor());
-			aux.setSala(curso.getSala());
-			aux.setData(curso.getData());
 		}
 
 		return aux;

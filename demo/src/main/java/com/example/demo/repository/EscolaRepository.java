@@ -73,8 +73,6 @@ public class EscolaRepository {
         Escola aux = getEscolaByID(escola.getId()).get(); //Armazena os dados da escola com o ID correto de um Optional, para isso se dever usar o get
 
         if (aux != null) {
-            aux.setNome(escola.getNome());
-            aux.setEndereco(escola.getEndereco());
             aux.setTel(escola.getTel());
             aux.setEmail(escola.getEmail());    
         }

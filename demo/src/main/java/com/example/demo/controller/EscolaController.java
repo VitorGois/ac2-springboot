@@ -8,6 +8,7 @@ import com.example.demo.dto.CursoDTO;
 import com.example.demo.dto.EscolaDTO;
 import com.example.demo.model.Curso;
 import com.example.demo.model.Escola;
+import com.example.demo.repository.EscolaRepository;
 import com.example.demo.service.CursoService;
 import com.example.demo.service.EscolaService;
 
@@ -36,6 +37,9 @@ public class EscolaController {
 
     @Autowired
     private CursoService cursoService;
+
+    @Autowired
+    private EscolaRepository escolaRepository;
 
     //Faz a leitura do método HTTP GET (receber)
     @GetMapping
@@ -80,13 +84,14 @@ public class EscolaController {
         retornando o status de sem conteúdo a mostrar
         */
     public ResponseEntity<Void> deleteEscola(@PathVariable int id) {
-        if(escolaService.isEmpty(id)) {
-            escolaService.removeByID(id);
+        Escola aux = escolaService.getEscolaByID(id);
 
+        if(aux.getCursos().isEmpty()) {
+            escolaRepository.remove(aux);
             return ResponseEntity.badRequest().build(); //status 400 (badRequest)
         }
-
-          return ResponseEntity.status(405).build(); //status 405 (notAllowed)
+        
+        return ResponseEntity.status(405).build(); //status 405 (notAllowed)
     }
 
     //Faz a leitura do método HTTP PUT (Atualizar)
@@ -124,17 +129,11 @@ public class EscolaController {
         return ResponseEntity.created(uriComponents.toUri()).build(); //status 200 (created)
     }
 
-    @DeleteMapping("/{id}/cursos") 
-    public ResponseEntity<Void> deleteCursos(@PathVariable int id) {
+    @DeleteMapping("/{id}/cursos/{cod}") 
+    public ResponseEntity<Void> deleteCursos(@PathVariable int id, @PathVariable int cod) {
         Escola escola = escolaService.getEscolaByID(id);
 
-        for(Curso curso : cursoService.getAllCursos()) {
-            Escola aux = curso.getEscola();
-
-            if(aux.getId() == id) {
-                escola.removeCurso(curso);
-            }
-        }
+        cursoService.removeByID(cod, escola);
 
         return ResponseEntity.noContent().build();
     }
