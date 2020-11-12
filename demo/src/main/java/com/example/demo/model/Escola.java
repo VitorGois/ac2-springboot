@@ -28,12 +28,12 @@ public class Escola {
 		this.cursos = cursos;
 	}
 
-	public boolean addCurso(Curso curso) {
-        return cursos.add(curso);
+	public void addCurso(Curso curso) {
+        cursos.add(curso);
     }
 
-    public boolean removeCurso(Curso curso) {
-        return cursos.remove(curso);
+    public void removeCurso(Curso curso) {
+        cursos.remove(curso);
     }
 
 	public void setId(int id) {

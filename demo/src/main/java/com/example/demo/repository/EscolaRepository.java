@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 //Anotação responsável por indicar ao Spring que se trata de uma classe Componente
 @Component
 public class EscolaRepository {
-
+    
     private ArrayList<Escola> escolas = new ArrayList<>();
     private int nextID=1;
 

@@ -72,5 +72,15 @@ public class EscolaService {
 		getEscolaByID(escola.getId());
 		return repository.update(escola);
 	}
+
+	public boolean isEmpty(int id) {
+		Escola escola = getEscolaByID(id);
+
+		if(escola.getCursos().isEmpty()) {
+			return true;
+		}
+
+		return false;
+	}
     
 }

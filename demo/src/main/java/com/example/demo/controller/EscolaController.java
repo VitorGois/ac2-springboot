@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.demo.dto.CursoDTO;
 import com.example.demo.dto.EscolaDTO;
 import com.example.demo.model.Curso;
 import com.example.demo.model.Escola;
@@ -79,9 +80,13 @@ public class EscolaController {
         retornando o status de sem conteúdo a mostrar
         */
     public ResponseEntity<Void> deleteEscola(@PathVariable int id) {
-        escolaService.removeByID(id);
+        if(escolaService.isEmpty(id)) {
+            escolaService.removeByID(id);
 
-        return ResponseEntity.noContent().build();  //status 204 (noContent)
+            return ResponseEntity.badRequest().build(); //status 400 (badRequest)
+        }
+
+          return ResponseEntity.status(405).build(); //status 405 (notAllowed)
     }
 
     //Faz a leitura do método HTTP PUT (Atualizar)
@@ -100,9 +105,9 @@ public class EscolaController {
     @GetMapping("/{id}/cursos")
     
     //Método responsável por buscar todos os cursos referente a Escola de ID   
-    public List<Curso> getPedidosCliente(@PathVariable int id) {
+    public List<CursoDTO> getCursoEscola(@PathVariable int id) {
         Escola aux = escolaService.getEscolaByID(id);
-        return aux.getCursos();	
+        return cursoService.toListDTO(aux.getCursos());	
     }
 
     @PostMapping("/{id}/cursos")
@@ -117,6 +122,21 @@ public class EscolaController {
         UriComponents uriComponents = builder.path(request.getRequestURI() + "/" + curso.getId()).build();
 
         return ResponseEntity.created(uriComponents.toUri()).build(); //status 200 (created)
+    }
+
+    @DeleteMapping("/{id}/cursos") 
+    public ResponseEntity<Void> deleteCursos(@PathVariable int id) {
+        Escola escola = escolaService.getEscolaByID(id);
+
+        for(Curso curso : cursoService.getAllCursos()) {
+            Escola aux = curso.getEscola();
+
+            if(aux.getId() == id) {
+                escola.removeCurso(curso);
+            }
+        }
+
+        return ResponseEntity.noContent().build();
     }
 
 }

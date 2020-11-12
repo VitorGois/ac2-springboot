@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,24 @@ public class CursoService {
 
 	@Autowired
 	private EscolaService escolaService;
+
+	public CursoDTO toDTO(Curso curso) {
+		CursoDTO dto = new CursoDTO();
+
+		dto.setProfessor(curso.getProfessor());
+
+		return dto;
+	}
+
+	public List<CursoDTO> toListDTO(List<Curso> cursos) {
+		ArrayList <CursoDTO> dtoList = new ArrayList<>();
+
+		for(Curso curso : cursos) {
+			dtoList.add(toDTO(curso));
+		}
+
+		return dtoList;
+	}
 
 	public List<Curso> getAllCursos() {
 		return repository.getAllCursos();
@@ -60,6 +79,4 @@ public class CursoService {
 		return repository.update(curso);
 	}
 
-	
-    
 }
