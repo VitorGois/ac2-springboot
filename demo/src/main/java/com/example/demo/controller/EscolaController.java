@@ -86,6 +86,10 @@ public class EscolaController {
     public ResponseEntity<Void> deleteEscola(@PathVariable int id) {
         Escola aux = escolaService.getEscolaByID(id);
 
+        /*
+            Estrutura condicional responsável por verificar, através de uma função própria de ArrayList, se
+            a escola que se dejesa apagar dos registros está vazia (sem nenhum curso).
+            */
         if(aux.getCursos().isEmpty()) {
             escolaRepository.remove(aux);
             return ResponseEntity.badRequest().build(); //status 400 (badRequest)
@@ -130,12 +134,16 @@ public class EscolaController {
     }
 
     @DeleteMapping("/{id}/cursos/{cod}") 
+    /*
+        Método responsável por deletar um curso de determinada escola
+        retornando o status de noContent (204)
+        */
     public ResponseEntity<Void> deleteCursos(@PathVariable int id, @PathVariable int cod) {
         Escola escola = escolaService.getEscolaByID(id);
 
         cursoService.removeByID(cod, escola);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build(); //status 204 (noContent)
     }
 
 }
