@@ -44,8 +44,13 @@ public class CursoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Curso> putCurso(@PathVariable int id, @RequestBody CursoDTO novosDados) {
+        Curso curso = cursoService.getCursoByID(id);
         Curso aux = cursoService.fromDTO(novosDados);
         aux.setId(id);
+        aux.setData(curso.getData());
+        aux.setEscola(curso.getEscola());
+        aux.setNome(curso.getNome());
+        aux.setSala(curso.getSala());
         aux = cursoService.update(aux);
 
         return ResponseEntity.ok(aux);
