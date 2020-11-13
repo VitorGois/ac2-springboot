@@ -14,20 +14,7 @@ public class EscolaRepository {
     private ArrayList<Escola> escolas = new ArrayList<>();
     private int nextID=1;
 
-    // @PostConstruct
-    // public void init() {
-    //     Escola e1 = new Escola();
-    //     e1.setId(1);
-    //     e1.setNome("Facens");
-    //     e1.setEndereco("Rua Facens");
-    //     e1.setEmail("facens@facens.br");
-    //     e1.setTel("(15) 3232-3232");
-
-    //     escolas = new ArrayList<Escola>();
-    //     escolas.add(e1);
-
-    //     nextID = 2;
-    // }
+    
 
     /*  Método responsável por fazer a busca de todas as escolas,
         retornando uma lista
