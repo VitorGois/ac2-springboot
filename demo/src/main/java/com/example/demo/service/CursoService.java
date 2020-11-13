@@ -26,7 +26,10 @@ public class CursoService {
 	public CursoDTO toDTO(Curso curso) {
 		CursoDTO dto = new CursoDTO();
 
+		dto.setNome(curso.getNome());
 		dto.setProfessor(curso.getProfessor());
+		dto.setSala(curso.getSala());
+		dto.setData(curso.getData());
 
 		return dto;
 	}
@@ -77,7 +80,6 @@ public class CursoService {
 	}
 
 	public Curso update(Curso curso) {
-		getCursoByID(curso.getId());
 		return repository.update(curso);
 	}
 
